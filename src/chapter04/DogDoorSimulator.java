@@ -1,24 +1,42 @@
 package chapter04;
 
 public class DogDoorSimulator {
+
     public static void main(String[] args) {
-        DogDoor dogDoor = new DogDoor();
-        Remote remote = new Remote(dogDoor);
-        BarkRecognizer barkRecognizer = new BarkRecognizer(dogDoor);
+        DogDoor door = new DogDoor();
+        door.addAllowedBark(new Bark("rowlf"));
+        door.addAllowedBark(new Bark("rooowlf"));
+        door.addAllowedBark(new Bark("rawlf"));
+        door.addAllowedBark(new Bark("woof"));
+        BarkRecognizer recognizer = new BarkRecognizer(door);
+        Remote remote = new Remote(door);
 
-        System.out.println("Fido barks to go outside...");
-        barkRecognizer.recognize("Woof");
-        System.out.println("Fido has gone outside...");
-        System.out.println("Fido's all done...");
+        // Simulate the hardware hearing a bark
+        System.out.println("Bruce starts barking.");
+        recognizer.recognize(new Bark("Rowlf"));
 
-        try{
-            Thread.sleep(10000);
-        } catch (InterruptedException e){ }
-        System.out.println("... but he is stuck outside");
-        System.out.println("Fido scratches at the door");
-        System.out.println("Fido starts barking");
-        System.out.println("... so Todd grabs the remote control");
-        barkRecognizer.recognize("Woof");
-        System.out.println("Fido's back inside...");
+        System.out.println("\nBruce has gone outside...");
+
+        try {
+            Thread.currentThread().sleep(10000);
+        } catch (InterruptedException e) { }
+
+        System.out.println("\nBruce all done...");
+        System.out.println("...but he's stuck outside!");
+
+        // Simulate the hardware hearing a bark (not Bruce!)
+        Bark smallDogBark = new Bark("yip");
+        System.out.println("A small dog starts barking.");
+        recognizer.recognize(smallDogBark);
+
+        try {
+            Thread.currentThread().sleep(5000);
+        } catch (InterruptedException e) { }
+
+        // Simulate the hardware hearing a bark again
+        System.out.println("\nBruce starts barking.");
+        recognizer.recognize(new Bark("Rowlf"));
+
+        System.out.println("\nBruce's back inside...");
     }
 }

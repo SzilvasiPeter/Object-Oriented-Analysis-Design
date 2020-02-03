@@ -1,14 +1,18 @@
 package chapter04;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class DogDoor {
     private boolean open;
-    private Bark[] allowedBark;
+    private List<Bark> allowedBarks;
 
-    public DogDoor() {
+    public DogDoor()
+    {
         this.open = false;
+        this.allowedBarks = new LinkedList<Bark>();
     }
 
     public void open() {
@@ -34,12 +38,15 @@ public class DogDoor {
         return open;
     }
 
-    public Bark[] getAllowedBark() {
-        return allowedBark;
+    public List<Bark> getAllowedBark() {
+        return allowedBarks;
     }
 
-    public void setAllowedBark(Bark[] allowedBark) {
-        this.allowedBark = allowedBark;
+    public void setAllowedBark(List<Bark> allowedBark) {
+        this.allowedBarks = allowedBark;
     }
 
+    public void addAllowedBark(Bark bark) {
+        allowedBarks.add(bark);
+    }
 }
