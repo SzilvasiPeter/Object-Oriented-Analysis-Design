@@ -2,10 +2,10 @@ package chapter05;
 
 public abstract class Instrument {
     private String serialNumber;
-    private int price;
+    private double price;
     private InstrumentSpec spec;
 
-    public Instrument(String serialNumber, int price, InstrumentSpec spec) {
+    public Instrument(String serialNumber, double price, InstrumentSpec spec) {
         this.serialNumber = serialNumber;
         this.price = price;
         this.spec = spec;
@@ -19,11 +19,11 @@ public abstract class Instrument {
         this.serialNumber = serialNumber;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

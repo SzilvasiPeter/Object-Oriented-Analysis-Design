@@ -12,7 +12,7 @@ public class Inventory {
         this.guitars = new LinkedList<Guitar>();
     }
 
-    public void addGuitar(String serialNumber, int price, GuitarSpec guitarSpec){
+    public void addGuitar(String serialNumber, double price, GuitarSpec guitarSpec){
         Guitar guitar = new Guitar(serialNumber, price, guitarSpec);
         guitars.add(guitar);
     }
