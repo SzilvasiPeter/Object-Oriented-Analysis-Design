@@ -1,56 +1,35 @@
 package chapter05;
 
-public abstract class InstrumentSpec {
-    private Builder builder;
-    private String model;
-    private Type type;
-    private Wood backWood;
-    private Wood topWood;
+import java.util.HashMap;
+import java.util.Map;
 
-    public InstrumentSpec(Builder builder, String model, Type type, Wood backWood, Wood topWood) {
-        this.builder = builder;
-        this.model = model;
-        this.type = type;
-        this.backWood = backWood;
-        this.topWood = topWood;
+public class InstrumentSpec {
+    private Map properties;
+
+    public InstrumentSpec(Map properties) {
+        if(properties == null){
+            this.properties = new HashMap();
+        } else {
+            this.properties = new HashMap(properties);
+        }
     }
 
-    public Builder getBuilder() {
-        return builder;
+    public Object getProperty(String propertyName){
+        return properties.get(propertyName);
     }
 
-
-    public String getModel() {
-        return model;
+    public Map getProperties() {
+        return properties;
     }
 
+    public boolean matches(InstrumentSpec otherSpec){
+        for(Object property : properties.keySet()){
+            String propertyName = (String) property;
+            if(properties.get(propertyName).equals(otherSpec.getProperty(propertyName))){
+                return true;
+            }
+        }
 
-    public Type getType() {
-        return type;
-    }
-
-
-    public Wood getBackWood() {
-        return backWood;
-    }
-
-
-    public Wood getTopWood() {
-        return topWood;
-    }
-
-    public boolean matches(InstrumentSpec instrumentSpec) {
-        if (builder != instrumentSpec.builder)
-            return false;
-        if ((model != null) && (!model.equals("")) &&  (!model.equals(instrumentSpec.model)))
-            return false;
-        if (type != instrumentSpec.type)
-            return false;
-        if (backWood != instrumentSpec.backWood)
-            return false;
-        if (topWood != instrumentSpec.topWood)
-            return false;
-
-        return true;
+        return false;
     }
 }
