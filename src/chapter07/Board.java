@@ -2,7 +2,6 @@ package chapter07;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.spi.AbstractResourceBundleProvider;
 
 public class Board {
 
@@ -20,13 +19,13 @@ public class Board {
         for (int i = 0; i < width; i++) {
             tiles.add(i, new ArrayList(height));
             for (int j = 0; j < height; j++) {
-                ((ArrayList) tiles.get(i)).add(j, new Title());
+                ((ArrayList) tiles.get(i)).add(j, new Tile());
             }
         }
     }
 
-    public Title getTitle(int x, int y) {
-        return (Title) ((ArrayList) tiles.get(x - 1)).get(y - 1);
+    public Tile getTile(int x, int y) {
+        return (Tile) ((ArrayList) tiles.get(x - 1)).get(y - 1);
     }
 
     public void addUnit(Unit unit, int x, int y) {
@@ -37,6 +36,11 @@ public class Board {
     public void removeUnits(int x, int y) {
         Tile tile = getTile(x, y);
         tile.removeUnits();
+    }
+
+    public void removeUnit(Unit unit, int x, int y){
+        Tile tile = getTile(x, y);
+        tile.removeUnit(unit);
     }
 
     public List getUnits(int x, int y) {
