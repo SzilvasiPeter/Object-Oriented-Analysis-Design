@@ -58,4 +58,12 @@ public class Unit {
     public void setProperties(Map properties) {
         this.properties = properties;
     }
+
+    public void setProperty(String propertyName, Object propertyValue){
+        this.properties.put(propertyName, propertyValue);
+    }
+
+    public Object getProperty(String propertyName){
+        return this.properties.get(propertyName);
+    }
 }
