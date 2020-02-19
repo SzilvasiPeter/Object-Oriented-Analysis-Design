@@ -55,7 +55,10 @@ public class Unit {
         return properties;
     }
 
-    public void setProperties(Map properties) {
+    public void setProperties(Map properties) throws IllegalAccessException {
+        if(properties == null){
+            throw new IllegalAccessException("Properties cannot be null");
+        }
         this.properties = properties;
     }
 
@@ -63,7 +66,10 @@ public class Unit {
         this.properties.put(propertyName, propertyValue);
     }
 
-    public Object getProperty(String propertyName){
+    public Object getProperty(String propertyName) throws IllegalAccessException {
+        if(properties == null){
+            throw new IllegalAccessException("Properties cannot be null");
+        }
         return this.properties.get(propertyName);
     }
 }
