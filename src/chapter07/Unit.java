@@ -66,9 +66,13 @@ public class Unit {
         this.properties.put(propertyName, propertyValue);
     }
 
-    public Object getProperty(String propertyName) throws IllegalAccessException {
+    public Object getProperty(String propertyName){
         if(properties == null){
-            throw new IllegalAccessException("Properties cannot be null");
+            try {
+                throw new IllegalAccessException("Properties cannot be null");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         return this.properties.get(propertyName);
     }
