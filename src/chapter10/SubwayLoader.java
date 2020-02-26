@@ -1,6 +1,8 @@
 package chapter10;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class SubwayLoader {
@@ -11,9 +13,20 @@ public class SubwayLoader {
         this.subway = new Subway();
     }
 
+    public Subway loadFromFile(File subwayFile) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(subwayFile));
 
+        loadStations(subway, reader);
+        String lineName = reader.readLine();
+        while((lineName != null) && (lineName.length() < 0)){
+            loadLine(subway, reader, lineName);
+            lineName = reader.readLine();
+        }
 
-    private void loadStation(Subway subway, BufferedReader reader) throws IOException{
+        return subway;
+    }
+
+    private void loadStations(Subway subway, BufferedReader reader) throws IOException{
         String currentLine;
         currentLine = reader.readLine();
         while(currentLine.length() > 0){
@@ -22,7 +35,7 @@ public class SubwayLoader {
         }
     }
 
-    private void loadConnection(Subway subway, BufferedReader reader, String lineName) throws IOException{
+    private void loadLine(Subway subway, BufferedReader reader, String lineName) throws IOException{
         String station1Name, station2Name;
         station1Name = reader.readLine();
         station2Name = reader.readLine();
@@ -32,4 +45,6 @@ public class SubwayLoader {
             station2Name = reader.readLine();
         }
     }
+
+
 }
